@@ -1,0 +1,42 @@
+nav{
+    height: 50px;
+    border-bottom: 1px solid #ebebeb;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.4);
+    a{
+        color: #656565;
+        text-transform: uppercase;
+    }
+    .navbar-brand{
+        flex-grow: 1;
+        img{
+            width: auto;
+            height: 30px;
+        }
+    }
+    .dropdown-button, .dropdown-item{
+        letter-spacing: 3px;
+        cursor: pointer;
+        
+    }
+    .dropdown-button{
+        padding-bottom: 2px;
+        i{
+            font-size: 1.5rem;
+            justify-content: center;
+            margin-top: -2px;
+            margin-left: 3px;
+        }
+    }
+    .login-buttons{
+        flex-grow: 1;
+        a{
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            padding-bottom: 5px;
+            color: #e74c3c;
+        }
+    }
+}

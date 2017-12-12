@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'bs-navbar',
@@ -6,11 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bs-navbar.component.scss']
 })
 
-export class BsNavbarComponent implements OnInit {
+export class BsNavbarComponent{
+  
+  // isMobile: boolean;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    // this.isMobile=this.fnIsMobile();
   }
 
+  // fnIsMobile(): boolean{
+  //   if(window.innerWidth<768) return true;
+  // }
+
+  //Show full logo or smaller icon in navbar based on screen width
+  // @HostListener('window:resize')
+  // onResize(event) {
+  //   this.isMobile=this.fnIsMobile();
+  //   console.log("Resized");
+  // }
 }
