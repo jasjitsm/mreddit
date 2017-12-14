@@ -1,0 +1,75 @@
+//Import Global Variables
+@import "~app/shared/scss/variables.scss";
+
+#sidebar-header-wrapper{
+    padding: 35px 40px 20px 40px;
+
+    .d-vertical-align{
+        align-items: center;
+    }
+
+    #submit-new-button{
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        font-weight: 600;
+        color: $red;
+        text-transform: uppercase;
+        transition: all 0.7s;
+        &:hover{
+            text-decoration: none;
+            color: $red-dark;
+        }
+    }
+
+    #post-search-field{
+        position: relative;
+        margin-bottom: 0;
+        input{
+            border-radius: 30px;
+            font-size: 0.85rem;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-left: 35px;
+            font-weight: 300;
+            color: $dark-grey;
+            transition: all 1s;
+
+            &::placeholder{
+                color: $middle-grey;
+            }
+            &:focus{
+                box-shadow: none;
+                border-color: $red;
+            }
+        }
+        i{
+            position: absolute;
+            top: 9.5px;
+            left: 15px;
+            color: $middle-grey;
+            font-size: 0.85rem;
+        }
+    }
+
+    #category-selectors{
+        margin-top: 15px;
+        li{
+            a{
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+                font-weight: 600;
+                color: $middle-grey;
+                text-transform: uppercase;
+                transition: all 1s;
+                &:hover{
+                    text-decoration: none;
+                    color: $dark-grey;
+                }
+            }
+            .active{
+                color: $dark-grey;
+            }
+        } 
+    }
+
+}

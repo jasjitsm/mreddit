@@ -7,4 +7,10 @@ Global Styles
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"); //FontAwesome
 
 //App-Wide Font Imports
-@import url("https://fonts.googleapis.com/css?family=Montserrat:500,600");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,500,600");
+
+
+body, html{
+    height: 100%;
+    overflow-y: hidden;
+}

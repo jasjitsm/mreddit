@@ -1,10 +1,12 @@
 <nav class="navbar navbar-expand-md fixed-top">
 
-  <a class="navbar-brand" href="#">
+  <!-- Navbar Brand -->
+  <a class="navbar-brand" href="/">
     <img src="../assets/img/logo.png">
   </a>
 
-  <ul class="navbar-nav" style="flex-grow: 1; justify-content: center;">
+  <!-- Dropdown Menu for Default Subreddits -->
+  <ul class="navbar-nav dropdown-wrapper">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-button d-flex" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Front Page<i class="fa fa-angle-down" aria-hidden="true"></i></a>
       <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -15,18 +17,16 @@
     </li>
   </ul>
   
+  <!-- Mobile Menu Toggler -->
   <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <!-- Collapsible Login Buttons -->
   <div class="collapse navbar-collapse ml-auto login-buttons" id="mobileMenu">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Signup</a>
-      </li>
+        <a class="nav-item nav-link" href="#">Login</a>
+        <a class="nav-item nav-link" href="#">Signup</a>
     </ul>
   </div>
 

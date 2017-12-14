@@ -1,3 +1,24 @@
-<p>
-  sidebar-header works!
-</p>
+<div class="container" id="sidebar-header-wrapper">
+
+  <!-- Submit Post Button and Search Field -->
+  <div class="row d-flex flex-nowrap d-vertical-align justify-content-start">
+      <a id="submit-new-button" href="#">Submit New Post</a>
+      <div class="form-group ml-auto" id="post-search-field">
+        <input type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </div>
+  </div>
+
+  <!-- Display Category Selectors -->
+  <div class="row">
+    <ul class="list-inline" id="category-selectors">
+      <li class="list-inline-item"><a class="active" href="#">New</a></li>
+      <li class="list-inline-item"><a href="#">Rising</a></li>
+      <li class="list-inline-item"><a href="#">Top</a></li>
+      <li class="list-inline-item"><a href="#">Controversial</a></li>
+      <li class="list-inline-item"><a href="#">Gilded</a></li>
+      <li class="list-inline-item"><a href="#">Promoted</a></li>
+    </ul>
+  </div>
+  
+</div>
