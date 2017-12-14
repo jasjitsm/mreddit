@@ -5,6 +5,7 @@
     padding: 0px 40px 20px 40px;
 
     .sidebar-links-single{
+        margin-bottom: 20px;
 
         .links-voting{
             text-align: center;
@@ -60,11 +61,28 @@
         }
 
         .links-image{
+            font-size: 0.75rem;
+            color: $middle-grey;
+            padding-top: 2px;
             img{
-                width: 100px;
+                width: 120px;
                 height: 70px;
                 object-fit: cover;
                 border-radius: 5px;
+            }
+            a{
+                padding-top: 10px;
+                padding-left: 3px;
+                color: $middle-grey;
+                transition: all 0.7s;
+                &:hover{
+                    text-decoration: none;
+                    color: $dark-grey;
+                }
+            }
+            i{
+                padding-top: 12px;
+                font-size: 0.8rem;
             }
         }
     }
