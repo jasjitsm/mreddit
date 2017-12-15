@@ -1,12 +1,105 @@
 //Import Global Variables
 @import "~app/shared/scss/variables.scss";
 
-#article-wrapper{
+#article-main-wrapper{
     padding: 0px 40px;
+    padding-top: 25px;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: white;
+
+    .divider{
+        height: 1px;
+        background: $light-grey;
+        margin: 25px 0px;
+    }
+
+    #article-header-wrapper{
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+
+        .article-voting{
+            text-align: center;
+            color: $middle-grey;
+            p{
+                height: 2.5rem;
+                line-height: 2.5rem;
+                margin-bottom: 0;
+                font-size: 0.85rem;
+            }
+            a{
+                font-size: 0.9rem;
+            }
+        }
+
+        .article-description{
+            padding: 0px 20px;
+            .article-category{
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                font-weight: 600;
+                color: $teal;
+                text-transform: uppercase;
+                transition: all 0.7s;
+                &:hover{
+                    text-decoration: none;
+                    color: $teal-dark;
+                }
+            }
+            .article-title{
+                padding-top: 5px;
+                font-size: 1.4rem;
+                color: $dark-grey;
+                transition: all 0.7s;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+            .article-submitted{
+                padding-top: 8px;
+                font-size: 0.75rem;
+                color: $middle-grey;
+                margin-bottom: 0;
+                a{
+                    color: $blue;
+                    transition: all 0.7s;
+                    &:hover{
+                        text-decoration: none;
+                        color: $blue-dark;
+                    }
+                }
+            }
+        }
+
+        .article-image{
+            font-size: 0.75rem;
+            color: $middle-grey;
+            padding-top: 2px;
+            img{
+                width: 155px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+            a{
+                padding-top: 10px;
+                padding-left: 3px;
+                color: $middle-grey;
+                transition: all 0.7s;
+                &:hover{
+                    text-decoration: none;
+                    color: $dark-grey;
+                }
+            }
+            i{
+                padding-top: 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+    }
 }
