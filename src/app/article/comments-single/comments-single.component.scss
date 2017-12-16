@@ -1,0 +1,39 @@
+//Import Global Variables
+@import "~app/shared/scss/variables.scss";
+
+.single-comment-wrapper{
+    margin-bottom: 10px;
+
+    .comment-voting{
+        color: $middle-grey;
+        a{
+            font-size: 0.7rem;
+        }
+    }
+
+    .comment-content{
+        padding: 0px 0px 0px 10px;
+        p{
+            margin-bottom: 0;
+        }
+        .comment-header{
+            font-size: 0.75rem;
+            color: $middle-grey;
+            margin-bottom: 0;
+            a{
+                color: $blue;
+                transition: all 0.7s;
+                &:hover{
+                    text-decoration: none;
+                    color: $blue-dark;
+                }
+            }
+        }
+        .comment-text{
+            padding-top: 3px;
+            font-size: 0.9rem;
+            color: $dark-grey;
+        }
+    }
+
+}

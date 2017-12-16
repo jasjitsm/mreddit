@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-comments-single',
+  selector: 'comments-single',
   templateUrl: './comments-single.component.html',
   styleUrls: ['./comments-single.component.scss']
 })
