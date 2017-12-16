@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RedditDataService } from '../../services/reddit-data.service';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'sidebar-links',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarLinksComponent implements OnInit {
 
-  constructor() { }
+sidebarLinks: any[];
+errorMessage: any;
 
-  ngOnInit() {
+  constructor(private _redditDataService: RedditDataService) { }
+
+  ngOnInit(): void{
+    this._redditDataService.getLinks()
+    .subscribe(
+      sidebarLinks => {
+        this.sidebarLinks = sidebarLinks;
+        console.log(this.sidebarLinks);
+      },
+      error => this.errorMessage = <any>error,
+    );
   }
 
 }

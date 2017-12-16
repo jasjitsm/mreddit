@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 
@@ -13,6 +14,8 @@ import { SidebarLinksComponent } from './sidebar/sidebar-links/sidebar-links.com
 import { ArticleMainComponent } from './article/article-main/article-main.component';
 import { CommentsListComponent } from './article/comments-list/comments-list.component';
 import { CommentsSingleComponent } from './article/comments-single/comments-single.component';
+
+import { RedditDataService } from './services/reddit-data.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +30,11 @@ import { CommentsSingleComponent } from './article/comments-single/comments-sing
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [RedditDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
