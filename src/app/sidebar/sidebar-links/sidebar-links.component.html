@@ -13,12 +13,12 @@
     <div class="d-flex flex-column align-self-start justify-content-center links-description">
       <a class="links-category" href="#">{{ link.data.subreddit }}</a>
       <a class="links-title" href="#">{{ link.data.title }}</a>
-      <p class="links-submitted">Submitted {{ calcDate(link.data.created_utc) }} ago by <a href="#">{{ link.data.author }}</a></p>
+      <p class="links-submitted">Submitted {{ _redditDataService.calcDate(link.data.created_utc) }} ago by <a href="#">{{ link.data.author }}</a></p>
     </div>
 
     <!-- Link Image -->
     <div class="d-flex flex-column align-self-start ml-auto justify-content-center links-image">
-      <img src="{{ isImage(link.data.thumbnail) ? link.data.thumbnail : '/assets/img/default-image.png' }}">
+      <img src="{{ _redditDataService.isImage(link.data.thumbnail) ? link.data.thumbnail : '/assets/img/default-image.png' }}">
       <div class="d-flex flex-row flex-nowrap">
         <i class="fa fa-comment-o" aria-hidden="true"></i>
         <a href="#">{{link.data.num_comments}} comments</a>

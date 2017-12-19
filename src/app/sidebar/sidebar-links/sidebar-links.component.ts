@@ -19,15 +19,12 @@ export class SidebarLinksComponent implements OnInit {
   currentPage: number;
   finalLinkName: string;
 
-  date_difference: number;
-
   constructor(private _redditDataService: RedditDataService) { }
 
   ngOnInit(): void{
     this.currentPage=0;
     this.finalLinkName="";
     this.subscribeToObservable();
-    this._redditDataService.sidebarLinkClicked=false;
   }
 
   //Subscribe to RedditDataService's getLinkData() Observable.
@@ -51,39 +48,6 @@ export class SidebarLinksComponent implements OnInit {
     );
   }
 
-  //Calculate how long ago a post was added based on the UNIX Timestamp.
-  calcDate(created_utc: number): string{
-
-    this.date_difference = new Date().getTime()-new Date(created_utc*1000).getTime();
-
-    if(Math.floor(this.date_difference/(24*60*60*1000))>0){
-      this.date_difference = Math.floor(this.date_difference/(24*60*60*1000));
-      return this.date_difference + " days";
-    }
-    else if(Math.floor(this.date_difference/(60*60*1000))>0){
-      this.date_difference = Math.floor(this.date_difference/(60*60*1000));
-      return this.date_difference + " hours";
-    }
-    else if(Math.floor(this.date_difference/(60*1000))>0){
-      this.date_difference = Math.floor(this.date_difference/(60*60*1000));
-      return this.date_difference + " minutes";
-    }
-    else return " a few seconds ago";
-    
-  }
-
-  //In case a post doesn't have a thumbnail, display a generic default one.
-  isImage(image_url: string): boolean{
-    switch(image_url){
-      case "default": return false;
-      case "self": return false;
-      case "image": return false;
-      case "spoiler": return false;
-      case "nsfw": return false;
-    }
-    return true;
-  }
-
   //Load more posts upon button click.
   loadPosts($event): void{
     this.subscribeToObservable();
@@ -94,10 +58,8 @@ export class SidebarLinksComponent implements OnInit {
     this.serviceSubscription.unsubscribe();
   }
 
-  //Upon clicking a link in the sidebar, set the current link to be shown in the service.
-  setCurrentLink(currentLink: RedditLinks): void{
-    
-    this._redditDataService.setCurrentLink(currentLink);
-    this._redditDataService.sidebarLinkClicked =true;
+  //Upon clicking a link in the sidebar, tell the Subject to broadcast the current link to all subscribed components.
+  setCurrentLink(clickedLink: RedditLinks): void{
+    this._redditDataService.sendCurrentLink(clickedLink);
   }
 }

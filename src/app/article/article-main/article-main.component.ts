@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { RedditLinks } from '../../interfaces/reddit-data';
 import { RedditDataService } from '../../services/reddit-data.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'article-main',
   templateUrl: './article-main.component.html',
   styleUrls: ['./article-main.component.scss']
 })
-export class ArticleMainComponent implements OnInit {
 
-  // currentLink: RedditLinks;
+export class ArticleMainComponent implements OnDestroy {
+
+  currentLink: RedditLinks;
+  serviceSubscription: Subscription;
 
   constructor(private _redditDataService: RedditDataService) {
-    // this.currentLink=this._redditDataService.getCurrentLink();
+    this.serviceSubscription = this._redditDataService
+      .getCurrentLink()
+      .subscribe(currentLink => { this.currentLink = currentLink; });
   }
 
-  ngOnInit() {
-
+  //Unsubscribe to prevent memory leaks in case of routing (if added in the future).
+  ngOnDestroy() {
+    this.serviceSubscription.unsubscribe();
   }
 
 }
