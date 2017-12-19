@@ -9,7 +9,6 @@
     #sidebar-wrapper{
         position: absolute;
         top: 0;
-        bottom: 0;
         left: 0;
         width: 41.66%;
         height: 100%;
@@ -36,7 +35,7 @@
     }
 
     //Since we want bootstrap to kick in on mobile, remove absolute positioning for the wrappers
-    //below when you start developing the mobile version.
+    //below if/when we start developing the mobile version.
     @media (min-width: 768px){
         
     }

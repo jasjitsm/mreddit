@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RedditLinks } from '../../interfaces/reddit-data';
+import { RedditDataService } from '../../services/reddit-data.service';
 
 @Component({
   selector: 'article-main',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleMainComponent implements OnInit {
 
-  constructor() { }
+  // currentLink: RedditLinks;
+
+  constructor(private _redditDataService: RedditDataService) {
+    // this.currentLink=this._redditDataService.getCurrentLink();
+  }
 
   ngOnInit() {
+
   }
 
 }

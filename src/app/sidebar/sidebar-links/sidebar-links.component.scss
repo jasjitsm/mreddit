@@ -88,3 +88,26 @@
     }
 
 }
+
+#load_more_posts{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 80px;
+    cursor: pointer;
+    a{
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        font-weight: 600;
+        color: $red;
+        text-transform: uppercase;
+        transition: all 0.7s;
+        border: 1px solid $red;
+        &:hover{
+            text-decoration: none;
+            color: $red-dark;
+        }
+    }
+}
