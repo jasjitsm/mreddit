@@ -61,6 +61,7 @@
                 color: $middle-grey;
                 text-transform: uppercase;
                 transition: all 1s;
+                cursor: pointer;
                 &:hover{
                     text-decoration: none;
                     color: $dark-grey;

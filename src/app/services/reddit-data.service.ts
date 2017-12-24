@@ -8,21 +8,22 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class RedditDataService {
 
-  urlParams: string = ".json?raw_json=1";
   sidebarClicked = new Subject<any>();
+  categoryClicked = new Subject<any>();
 
   date_difference: number;
 
   constructor(private _http:HttpClient) { }
 
   //Returns an Observable with 25 Reddit post Objects.
-  getLinkData(urlToScrape: string, page?: number, finalLinkName?: string): Observable<any>{
+  getLinkData(urlToScrape: string, page?: number, currentCategory?: string, finalLinkName?: string): Observable<any>{
+    if(currentCategory) urlToScrape+=(currentCategory+"/");
+    urlToScrape+=".json?raw_json=1";
     if (page>0){
-      this.urlParams +=
+      urlToScrape +=
         ("?count="+page*25)
         + "&after="+finalLinkName;
     }
-    urlToScrape+=this.urlParams;
     return this._http.get(urlToScrape);
   }
 
@@ -33,9 +34,14 @@ export class RedditDataService {
   getCurrentLink(): Observable<any> {
     return this.sidebarClicked.asObservable();
   }
+
   sendCurrentCategory(clickedCategory: string){
-    this.sidebarClicked.next(clickedCategory);
+    this.categoryClicked.next(clickedCategory);
   }
+  getCurrentCategory(): Observable<any> {
+    return this.categoryClicked.asObservable();
+  }
+  
 
   
 

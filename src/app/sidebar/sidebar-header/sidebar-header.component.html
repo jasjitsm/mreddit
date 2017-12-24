@@ -12,13 +12,9 @@
   <!-- Display Category Selectors -->
   <div class="row">
     <ul class="list-inline" id="category-selectors">
-      <li class="list-inline-item"><a class="active" href="#">Hot</a></li>
-      <li class="list-inline-item"><a href="#">New</a></li>
-      <li class="list-inline-item"><a href="#">Rising</a></li>
-      <li class="list-inline-item"><a href="#">Top</a></li>
-      <li class="list-inline-item"><a href="#">Controversial</a></li>
-      <li class="list-inline-item"><a href="#">Gilded</a></li>
-      <li class="list-inline-item"><a href="#">Promoted</a></li>
+      <li *ngFor="let category of postCategories" class="list-inline-item">
+        <a [ngClass]="{'active': selectedCategory == category}" (click)="categoryClicked(category)">{{ category }}</a>
+      </li>
     </ul>
   </div>
   

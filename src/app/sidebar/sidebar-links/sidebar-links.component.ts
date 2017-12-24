@@ -12,11 +12,13 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class SidebarLinksComponent implements OnInit {
 
-  response: RedditLinks[]; 
-  serviceSubscription: Subscription; 
+  response: RedditLinks[];
+  categorySubscription: Subscription;
+  postSubscription: Subscription;
   errorMessage: any;
 
   currentPage: number;
+  currentCategory: string;
   finalLinkName: string;
 
   constructor(private _redditDataService: RedditDataService) { }
@@ -24,16 +26,30 @@ export class SidebarLinksComponent implements OnInit {
   ngOnInit(): void{
     this.currentPage=0;
     this.finalLinkName="";
-    this.subscribeToObservable();
+    this.subscribeToCurrentCategory();
+    this.subscribeToPosts();
+  }
+
+  subscribeToCurrentCategory(): void{
+    this.categorySubscription = this._redditDataService
+    .getCurrentCategory()
+    .subscribe(
+      currentCategory =>  {
+        this.currentCategory = currentCategory;
+        this.currentPage = 0;
+        this.subscribeToPosts();
+      },
+      () => {
+        
+      }
+    );
   }
 
   //Subscribe to RedditDataService's getLinkData() Observable.
-  subscribeToObservable(): void{
-    //Storing Subscription so we can unsubscribe from the Observable once we have the data.
-    this.serviceSubscription = this._redditDataService
-    .getLinkData("https://www.reddit.com/", this.currentPage, this.finalLinkName)
+  subscribeToPosts(): void{
+    this.postSubscription = this._redditDataService
+    .getLinkData("https://www.reddit.com/", this.currentPage, this.currentCategory, this.finalLinkName)
     .subscribe(
-      //Typecast JSON response to custom type RedditLinks.
       response => {
         (this.currentPage>0) ?
         Array.prototype.push.apply(this.response, <RedditLinks[]>response.data.children) :
@@ -41,21 +57,21 @@ export class SidebarLinksComponent implements OnInit {
       },
       error => this.errorMessage = <any>error,
       () => {
-        this.currentPage++;
         this.finalLinkName = this.response[this.response.length-1].data.name;
-        this.revoke_subscription();
+        this.revoke_subscription(this.postSubscription);
       }
     );
   }
 
   //Load more posts upon button click.
   loadPosts($event): void{
-    this.subscribeToObservable();
+    this.currentPage++;
+    this.subscribeToPosts();
   }
 
   //Unsubscribe from Observable.
-  revoke_subscription(): void{
-    this.serviceSubscription.unsubscribe();
+  revoke_subscription(subscription: Subscription): void{
+    subscription.unsubscribe();
   }
 
   //Upon clicking a link in the sidebar, tell the Subject to broadcast the current link to all subscribed components.

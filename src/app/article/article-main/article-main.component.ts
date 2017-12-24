@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
-import { RedditLinks, RedditComments, Stack } from '../../interfaces/reddit-data';
+import { RedditLinks, RedditComments } from '../../interfaces/reddit-data';
 import { RedditDataService } from '../../services/reddit-data.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Stack } from '../../interfaces/stack';
 
 @Component({
   selector: 'article-main',
@@ -28,12 +29,16 @@ export class ArticleMainComponent implements OnDestroy {
 
   constructor(private _redditDataService: RedditDataService) {
     this.commentsLoaded= false;
+    this.subscribeToCurrentLink();
+  }
+
+  subscribeToCurrentLink(): void{
     this.linkSubscription = this._redditDataService
-      .getCurrentLink()
-      .subscribe( currentLink =>  {
-        this.currentLink = currentLink;
-        if(this.currentLink!=null) this.subscribeToComments();
-      });
+    .getCurrentLink()
+    .subscribe( currentLink =>  {
+      this.currentLink = currentLink;
+      if(this.currentLink!=null) this.subscribeToComments();
+    });
   }
 
   subscribeToComments(): void{
@@ -42,7 +47,6 @@ export class ArticleMainComponent implements OnDestroy {
     .getLinkData("https://www.reddit.com"+this.currentLink.data.permalink)
     .subscribe(
       response => {
-        
         this.comments = <RedditComments>response[1];
         this.reorganize_comments(this.comments);
       } ,
