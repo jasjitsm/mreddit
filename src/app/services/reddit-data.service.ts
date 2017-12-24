@@ -8,14 +8,15 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class RedditDataService {
 
-  urlParams: string = "";
+  urlParams: string = ".json?raw_json=1";
   sidebarClicked = new Subject<any>();
+
+  date_difference: number;
 
   constructor(private _http:HttpClient) { }
 
-  //Method that, when subscribed to, will return an Observable with 25 Reddit posts as Objects.
+  //Returns an Observable with 25 Reddit post Objects.
   getLinkData(urlToScrape: string, page?: number, finalLinkName?: string): Observable<any>{
-    this.urlParams=(".json?raw_json=1");
     if (page>0){
       this.urlParams +=
         ("?count="+page*25)
@@ -25,34 +26,30 @@ export class RedditDataService {
     return this._http.get(urlToScrape);
   }
 
-  //Setter and Getter for the currently selected link in the sidebar.
-  // setCurrentLink(clickedLink: RedditLinks): void{
-  //   this.currentLink = clickedLink;
-  // }
-
+  //Subject methods to pass data between components that share this service in common.
   sendCurrentLink(clickedLink: RedditLinks) {
     this.sidebarClicked.next(clickedLink);
   }
-
   getCurrentLink(): Observable<any> {
-      return this.sidebarClicked.asObservable();
+    return this.sidebarClicked.asObservable();
+  }
+  sendCurrentCategory(clickedCategory: string){
+    this.sidebarClicked.next(clickedCategory);
   }
 
-
-
-
-
-
-
-
-
-  date_difference: number;
   
+
+
+
+
+
+
+
+
+
   //Calculate how long ago a post was added based on the UNIX Timestamp.
   calcDate(created_utc: number): string{
-    
     this.date_difference = new Date().getTime()-new Date(created_utc*1000).getTime();
-
     if(Math.floor(this.date_difference/(24*60*60*1000))>0){
       this.date_difference = Math.floor(this.date_difference/(24*60*60*1000));
       return this.date_difference + " days";
@@ -61,12 +58,11 @@ export class RedditDataService {
       this.date_difference = Math.floor(this.date_difference/(60*60*1000));
       return this.date_difference + " hours";
     }
-    else if(Math.floor(this.date_difference/(60*1000))>0){
-      this.date_difference = Math.floor(this.date_difference/(60*60*1000));
+    else if(Math.round(this.date_difference/(60*1000))>0){
+      this.date_difference = Math.round(this.date_difference/(60*1000));
       return this.date_difference + " minutes";
     }
-    else return " a few seconds ago";
-    
+    else return " a few seconds ago"; 
   }
 
   //In case a post doesn't have a thumbnail, display a generic default one.

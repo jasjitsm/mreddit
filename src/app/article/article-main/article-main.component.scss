@@ -7,9 +7,10 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
+    height: auto;
     background: white;
-    overflow-y: hidden;
+    padding-bottom: 120px;
 
     .divider{
         height: 1px;
@@ -101,5 +102,53 @@
             }
         }
 
+    }
+
+    .comments-loading{
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        
+        .spinner {
+            margin: 100px auto;
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            font-size: 10px;
+            div{
+                background-color: $dark-grey;
+                height: 100%;
+                width: 6px;
+                display: inline-block;
+                animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            }
+            .rect2 {
+                animation-delay: -1.1s;
+            }
+            .rect3 {
+                animation-delay: -1.0s;
+            }
+            .rect4 {
+                animation-delay: -0.9s;
+            }
+            .rect5 {
+                animation-delay: -0.8s;
+            }
+        }
+          
+        @keyframes sk-stretchdelay {
+            0%, 40%, 100% { 
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }  20% { 
+                transform: scaleY(1.0);
+                -webkit-transform: scaleY(1.0);
+            }
+        }
     }
 }

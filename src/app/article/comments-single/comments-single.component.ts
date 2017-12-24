@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RedditComments } from '../../interfaces/reddit-data';
+import { RedditDataService } from '../../services/reddit-data.service';
 
 @Component({
   selector: 'comments-single',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentsSingleComponent implements OnInit {
 
-  constructor() { }
+  @Input() comment: RedditComments;
+
+  constructor(private _redditDataService: RedditDataService) { }
 
   ngOnInit() {
+  }
+
+  getMargin(depth: number): string{
+    return depth*20 + "px";
   }
 
 }

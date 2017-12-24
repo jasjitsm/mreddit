@@ -1,7 +1,7 @@
 <div class="container d-flex flex-column" id="comments-list-wrapper">
-    
-<comments-single></comments-single>
-<comments-single></comments-single>
-<comments-single></comments-single>
+
+<div *ngFor="let comment of comments">
+    <comments-single [comment]="comment"></comments-single>
+</div>
 
 </div>

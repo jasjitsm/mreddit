@@ -2,7 +2,7 @@
 @import "~app/shared/scss/variables.scss";
 
 .single-comment-wrapper{
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 
     .comment-voting{
         color: $middle-grey;
@@ -33,7 +33,15 @@
             padding-top: 1px;
             font-size: 0.9rem;
             color: $dark-grey;
-        }
+            &::ng-deep a{
+                color: $blue;
+                transition: all 0.7s;
+                &:hover{
+                    text-decoration: none;
+                    color: $blue-dark;
+                }
+            }
+        }  
     }
 
 }

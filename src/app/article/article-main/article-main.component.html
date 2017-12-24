@@ -26,7 +26,17 @@
     <!-- Divider between article description and comments -->
     <div class="row divider"></div>
 
+    <div *ngIf="!commentsLoaded" class="comments-loading">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
     <!-- Begin Comments Component -->
-    <comments-list></comments-list>
+    <comments-list *ngIf="commentsLoaded" [comments] = "comments_reorganized"></comments-list>
 
 </div>
