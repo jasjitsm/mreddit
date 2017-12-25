@@ -22,7 +22,6 @@ export class SidebarHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  //Upon clicking a link in the sidebar, tell the Subject to broadcast the current link to all subscribed components.
   categoryClicked(clickedCategory: string): void{
     this._redditDataService.sendCurrentCategory(clickedCategory);
     this.selectedCategory = clickedCategory;

@@ -12,11 +12,13 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class SidebarLinksComponent implements OnInit {
 
+  subredditSubscription: Subscription;
   searchSubscription: Subscription;
   categorySubscription: Subscription;
   postSubscription: Subscription;
 
   response: RedditLinks[];
+  currentSubreddit: string;
   currentPage: number;
   currentCategory: string;
   finalLinkName: string;
@@ -32,12 +34,27 @@ export class SidebarLinksComponent implements OnInit {
     this.currentPage=0;
     this.finalLinkName="";
     this.oldSearchTerm="";
+    this.currentSubreddit="";
 
     this.showLoadingSpinner(true, true)
 
     this.subscribeToSearchTerm();
+    this.subscribeToSubreddit();
     this.subscribeToCurrentCategory();
     this.subscribeToPosts();
+  }
+
+  subscribeToSubreddit(): void{
+    this.subredditSubscription = this._redditDataService
+    .getCurrentSubreddit()
+    .subscribe(
+      currentSubreddit =>  {
+        this.showLoadingSpinner(true, true);
+        this.currentSubreddit = currentSubreddit;
+        this.currentPage = 0;
+        this.subscribeToPosts();
+      }
+    );
   }
 
   subscribeToSearchTerm(): void{
@@ -45,7 +62,6 @@ export class SidebarLinksComponent implements OnInit {
     .getSearchTerm()
     .subscribe(
       searchTerm =>  {
-        console.log(searchTerm);
         this.showLoadingSpinner(true, true);
         this.searchTerm = searchTerm;
         this.currentPage = 0;
@@ -70,7 +86,7 @@ export class SidebarLinksComponent implements OnInit {
   //Subscribe to RedditDataService's getLinkData() Observable.
   subscribeToPosts(): void{
     this.postSubscription = this._redditDataService
-    .getLinkData("https://www.reddit.com/", this.currentPage, this.currentCategory, this.finalLinkName, (this.searchTerm!=this.oldSearchTerm)? this.searchTerm : undefined)
+    .getLinkData("https://www.reddit.com/", this.currentPage, this.currentSubreddit, this.currentCategory, this.finalLinkName, (this.searchTerm!=this.oldSearchTerm)? this.searchTerm : undefined)
     .subscribe(
       response => {
         (this.currentPage>0) ?

@@ -9,12 +9,10 @@
   <ul class="navbar-nav dropdown-wrapper">
     <li ngbDropdown class="nav-item dropdown">
       <a ngbDropdownToggle class="nav-link d-flex dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Front Page<i class="fa fa-angle-down" aria-hidden="true"></i>
+        {{ currentSubreddit }}<i class="fa fa-angle-down" aria-hidden="true"></i>
       </a>
       <div ngbDropdownMenu class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a *ngFor="let link of dropdownList" class="dropdown-item" (click)="dropdownClicked(link)">{{ link.title }}</a>
       </div>
     </li>
   </ul>

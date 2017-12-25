@@ -11,15 +11,15 @@ export class RedditDataService {
   sidebarClicked = new Subject<any>();
   categoryClicked = new Subject<any>();
   searchTermEntered = new Subject<any>();
+  subredditChanged = new Subject<any>();
 
   date_difference: number;
 
   constructor(private _http:HttpClient) { }
 
-  //Returns an Observable with 25 Reddit post Objects.
-  getLinkData(urlToScrape: string, page?: number, currentCategory?: string, finalLinkName?: string, searchTerm?: string): Observable<any>{
-    if(searchTerm && searchTerm.length>0)
-    {
+  getLinkData(urlToScrape: string, page?: number, currentSubreddit?: string, currentCategory?: string, finalLinkName?: string, searchTerm?: string): Observable<any>{
+    if(currentSubreddit!="") urlToScrape+=(currentSubreddit+"/");
+    if(searchTerm && searchTerm.length>0){
       urlToScrape+=("search.json?q="+searchTerm);
       if (page>0){
         urlToScrape +=
@@ -32,10 +32,11 @@ export class RedditDataService {
       urlToScrape+=".json?raw_json=1";
       if (page>0){
         urlToScrape +=
-          ("?count="+page*25)
+          ("&count="+page*25)
           + "&after="+finalLinkName;
       }
     }
+    console.log(urlToScrape);
     return this._http.get(urlToScrape);
   }
 
@@ -61,16 +62,13 @@ export class RedditDataService {
     return this.searchTermEntered.asObservable();
   }
 
+  sendCurrentSubreddit(subreddit: string){
+    this.subredditChanged.next(subreddit);
+  }
+  getCurrentSubreddit(): Observable<any> {
+    return this.subredditChanged.asObservable();
+  }
   
-
-
-
-
-
-
-
-
-
   //Calculate how long ago a post was added based on the UNIX Timestamp.
   calcDate(created_utc: number): string{
     this.date_difference = new Date().getTime()-new Date(created_utc*1000).getTime();
