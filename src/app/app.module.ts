@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 //Custom Environment Imports
 import { environment } from '../environments/environment';
@@ -35,6 +36,7 @@ import { RedditDataService } from './services/reddit-data.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase)
   ],

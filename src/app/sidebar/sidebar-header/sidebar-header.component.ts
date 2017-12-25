@@ -12,8 +12,11 @@ export class SidebarHeaderComponent implements OnInit {
   postCategories: string[] = ["hot", "new", "rising", "top", "controversial"];
   selectedCategory: string;
 
+  searchTerm: string;
+
   constructor(private _redditDataService: RedditDataService) {
     this.selectedCategory = "hot";
+    this.searchTerm= "";
   }
 
   ngOnInit() {
@@ -23,6 +26,11 @@ export class SidebarHeaderComponent implements OnInit {
   categoryClicked(clickedCategory: string): void{
     this._redditDataService.sendCurrentCategory(clickedCategory);
     this.selectedCategory = clickedCategory;
+  }
+
+  search(): void{
+    this._redditDataService.sendSearchTerm(this.searchTerm);
+    this.searchTerm="";
   }
 
 }

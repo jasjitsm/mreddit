@@ -4,7 +4,7 @@
   <div class="row d-flex flex-nowrap d-vertical-align justify-content-start">
       <a id="submit-new-button" href="#">Submit New Post</a>
       <div class="form-group ml-auto" id="post-search-field">
-        <input type="text" class="form-control" placeholder="Search">
+        <input [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Search" (keyup.enter)="search()">
         <i class="fa fa-search" aria-hidden="true"></i>
       </div>
   </div>

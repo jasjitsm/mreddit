@@ -16,10 +16,8 @@ export class ArticleMainComponent implements OnDestroy {
   linkSubscription: Subscription;
 
   commentSubscription: Subscription;
-  errorMessage: any;
   comments: RedditComments;
   comments_reorganized: RedditComments[];
-
   commentsLoaded: boolean;
 
   /*
@@ -49,8 +47,7 @@ export class ArticleMainComponent implements OnDestroy {
       response => {
         this.comments = <RedditComments>response[1];
         this.reorganize_comments(this.comments);
-      } ,
-      error => this.errorMessage = <any>error,
+      } , undefined,
       () => {
         this.commentsLoaded = true;
         this.revoke_subscription();
