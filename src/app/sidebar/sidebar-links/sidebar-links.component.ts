@@ -23,7 +23,7 @@ export class SidebarLinksComponent implements OnInit {
   currentCategory: string;
   finalLinkName: string;
   searchTerm: string;
-  oldSearchTerm: string;
+  // oldSearchTerm: string;
 
   showSidebarLinks: boolean;
   showSidebarSpinner: boolean;
@@ -33,7 +33,7 @@ export class SidebarLinksComponent implements OnInit {
   ngOnInit(): void{
     this.currentPage=0;
     this.finalLinkName="";
-    this.oldSearchTerm="";
+    // this.oldSearchTerm="";
     this.currentSubreddit="";
 
     this.showLoadingSpinner(true, true)
@@ -86,7 +86,7 @@ export class SidebarLinksComponent implements OnInit {
   //Subscribe to RedditDataService's getLinkData() Observable.
   subscribeToPosts(): void{
     this.postSubscription = this._redditDataService
-    .getLinkData("https://www.reddit.com/", this.currentPage, this.currentSubreddit, this.currentCategory, this.finalLinkName, (this.searchTerm!=this.oldSearchTerm)? this.searchTerm : undefined)
+    .getLinkData("https://www.reddit.com/", this.currentPage, this.currentSubreddit, this.currentCategory, this.finalLinkName, this.searchTerm)
     .subscribe(
       response => {
         (this.currentPage>0) ?
@@ -94,7 +94,7 @@ export class SidebarLinksComponent implements OnInit {
         this.response = <RedditLinks[]>response.data.children;
       }, undefined,
       () => {
-        this.oldSearchTerm=this.searchTerm;
+        // this.oldSearchTerm=this.searchTerm;
         this.showLoadingSpinner(false);
         this.finalLinkName = this.response[this.response.length-1].data.name;
         this.revoke_subscription(this.postSubscription);
@@ -105,7 +105,7 @@ export class SidebarLinksComponent implements OnInit {
   //Load more posts upon button click.
   loadPosts($event): void{
     this.currentPage++;
-    if(this.currentPage>0 && this.oldSearchTerm==this.searchTerm) this.oldSearchTerm="";
+    // if(this.currentPage>0 && this.oldSearchTerm==this.searchTerm) this.oldSearchTerm="";
     this.showLoadingSpinner(true);
     this.subscribeToPosts();
   }

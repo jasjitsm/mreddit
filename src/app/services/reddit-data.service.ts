@@ -14,25 +14,40 @@ export class RedditDataService {
   subredditChanged = new Subject<any>();
 
   date_difference: number;
+  oldSearchTerm: string;
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http:HttpClient) {
+    this.oldSearchTerm = "";
+  }
 
   getLinkData(urlToScrape: string, page?: number, currentSubreddit?: string, currentCategory?: string, finalLinkName?: string, searchTerm?: string): Observable<any>{
-    if(currentSubreddit!="") urlToScrape+=(currentSubreddit+"/");
-    if(searchTerm && searchTerm.length>0){
+    console.log(this.oldSearchTerm);
+    // if(currentSubreddit!="") urlToScrape+=(currentSubreddit+"/");
+    if(searchTerm && searchTerm.length>0 && this.oldSearchTerm!=searchTerm){
       urlToScrape+=("search.json?q="+searchTerm);
       if (page>0){
         urlToScrape +=
           ("&count="+page*25)
           + "&after="+finalLinkName;
       }
+      this.oldSearchTerm=searchTerm;
+    }
+    else if(searchTerm && searchTerm.length>0 && this.oldSearchTerm==searchTerm && page>0){
+      urlToScrape+=("search.json?q="+searchTerm);
+      if (page>0){
+        urlToScrape +=
+          ("&count="+page*25)
+          + "&after="+finalLinkName;
+      }
+      this.oldSearchTerm=searchTerm;
     }
     else{
+      if(currentSubreddit!="") urlToScrape+=(currentSubreddit+"/");
       if(currentCategory) urlToScrape+=(currentCategory+"/");
       urlToScrape+=".json?raw_json=1";
       if (page>0){
         urlToScrape +=
-          ("&count="+page*25)
+          ("?count="+page*25)
           + "&after="+finalLinkName;
       }
     }
