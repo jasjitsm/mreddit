@@ -1,3 +1,11 @@
+/*
+
+Name: SidebarLinksComponent
+
+This component retreives and displays links in the sidebar based on the currently selected qualifiers.
+
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { RedditDataService } from '../../services/reddit-data.service';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './sidebar-links.component.html',
   styleUrls: ['./sidebar-links.component.scss']
 })
+
 export class SidebarLinksComponent implements OnInit {
 
   subredditSubscription: Subscription;
@@ -23,7 +32,6 @@ export class SidebarLinksComponent implements OnInit {
   currentCategory: string;
   finalLinkName: string;
   searchTerm: string;
-  // oldSearchTerm: string;
 
   showSidebarLinks: boolean;
   showSidebarSpinner: boolean;
@@ -33,10 +41,9 @@ export class SidebarLinksComponent implements OnInit {
   ngOnInit(): void{
     this.currentPage=0;
     this.finalLinkName="";
-    // this.oldSearchTerm="";
     this.currentSubreddit="";
 
-    this.showLoadingSpinner(true, true)
+    this.showLoadingSpinner(true, true);
 
     this.subscribeToSearchTerm();
     this.subscribeToSubreddit();
@@ -94,7 +101,6 @@ export class SidebarLinksComponent implements OnInit {
         this.response = <RedditLinks[]>response.data.children;
       }, undefined,
       () => {
-        // this.oldSearchTerm=this.searchTerm;
         this.showLoadingSpinner(false);
         this.finalLinkName = this.response[this.response.length-1].data.name;
         this.revoke_subscription(this.postSubscription);
@@ -105,7 +111,6 @@ export class SidebarLinksComponent implements OnInit {
   //Load more posts upon button click.
   loadPosts($event): void{
     this.currentPage++;
-    // if(this.currentPage>0 && this.oldSearchTerm==this.searchTerm) this.oldSearchTerm="";
     this.showLoadingSpinner(true);
     this.subscribeToPosts();
   }
@@ -129,5 +134,13 @@ export class SidebarLinksComponent implements OnInit {
       this.showSidebarLinks = true;
       this.showSidebarSpinner = false;
     }
+  }
+
+  calcDate(created_utc: number): string{
+    return this._redditDataService.calcDate(created_utc);
+  }
+
+  isImage(image_url: string): boolean{
+    return this._redditDataService.isImage(image_url);
   }
 }

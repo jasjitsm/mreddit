@@ -11,7 +11,7 @@
         <p class="comment-header">
             <a href="#">{{ comment.data.author }}</a>&nbsp;&nbsp;
             {{ comment.data.ups }} points&nbsp;&nbsp;
-            {{_redditDataService.calcDate(comment.data.created_utc)}} ago
+            {{ calcDate(comment.data.created_utc) }} ago
         </p>
         <div class="comment-text" [innerHTML]= "comment.data.body_html"></div>
     </div>

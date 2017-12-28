@@ -12,13 +12,15 @@
         <!-- Article Header Text Description -->
         <div class="d-flex flex-column align-self-start justify-content-center article-description">
             <a class="article-category" href="#">{{ currentLink.data.subreddit }}</a>
-            <a class="article-title" href="#">{{ currentLink.data.title }}</a>
-            <p class="article-submitted">Submitted {{ _redditDataService.calcDate(currentLink.data.created_utc) }} ago by <a href="#">{{ currentLink.data.author }}</a></p>
+            <a class="article-title" href="{{ currentLink.data.url }}" target="_blank">{{ currentLink.data.title }}</a>
+            <p class="article-submitted">Submitted {{ calcDate(currentLink.data.created_utc) }} ago by <a href="#">{{ currentLink.data.author }}</a></p>
         </div>
 
         <!-- Article Header Image -->
         <div class="d-flex flex-column align-self-start ml-auto justify-content-center article-image">
-            <img src="{{ _redditDataService.isImage(currentLink.data.thumbnail) ? currentLink.data.thumbnail : '/assets/img/default-image.png' }}">
+            <a href="{{ currentLink.data.url }}" target="_blank">
+                <img src="{{ isImage(currentLink.data.thumbnail) ? currentLink.data.thumbnail : '/assets/img/default-image.png' }}">
+            </a>
         </div>
 
     </div>
@@ -26,6 +28,7 @@
     <!-- Divider between article description and comments -->
     <div class="row divider"></div>
 
+    <!-- Loading Spinner -->
     <div *ngIf="!commentsLoaded" class="comments-loading">
         <div class="spinner">
             <div class="rect1"></div>

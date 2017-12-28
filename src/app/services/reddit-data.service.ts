@@ -1,3 +1,14 @@
+/*
+
+Name: RedditDataService
+
+This service communicates with Reddit API, sending unauthenticated requests and
+receiving data asynchronously through Observables.
+It is also responsible for passing data between components that share this service,
+as well as providing them with common arithmetic and boolean functions.
+
+*/
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -21,8 +32,6 @@ export class RedditDataService {
   }
 
   getLinkData(urlToScrape: string, page?: number, currentSubreddit?: string, currentCategory?: string, finalLinkName?: string, searchTerm?: string): Observable<any>{
-    console.log(this.oldSearchTerm);
-    // if(currentSubreddit!="") urlToScrape+=(currentSubreddit+"/");
     if(searchTerm && searchTerm.length>0 && this.oldSearchTerm!=searchTerm){
       urlToScrape+=("search.json?q="+searchTerm);
       if (page>0){
@@ -51,11 +60,12 @@ export class RedditDataService {
           + "&after="+finalLinkName;
       }
     }
-    console.log(urlToScrape);
     return this._http.get(urlToScrape);
   }
 
+  
   //Subject methods to pass data between components that share this service in common.
+
   sendCurrentLink(clickedLink: RedditLinks) {
     this.sidebarClicked.next(clickedLink);
   }
@@ -83,8 +93,10 @@ export class RedditDataService {
   getCurrentSubreddit(): Observable<any> {
     return this.subredditChanged.asObservable();
   }
+
   
   //Calculate how long ago a post was added based on the UNIX Timestamp.
+
   calcDate(created_utc: number): string{
     this.date_difference = new Date().getTime()-new Date(created_utc*1000).getTime();
     if(Math.floor(this.date_difference/(24*60*60*1000))>0){
@@ -102,7 +114,9 @@ export class RedditDataService {
     else return " a few seconds ago"; 
   }
 
+
   //In case a post doesn't have a thumbnail, display a generic default one.
+
   isImage(image_url: string): boolean{
     switch(image_url){
       case "default": return false;

@@ -1,11 +1,12 @@
-export interface Collection{
+export interface StackInterface{
     push(value: any): void;
     pop(): any;
     peek(): any;
     isEmpty(): boolean;
 }
 
-export class Stack implements Collection{
+export class Stack implements StackInterface{
+
     top: any;
 
     constructor(){
@@ -32,4 +33,5 @@ export class Stack implements Collection{
     isEmpty(){
         return this.top === null;
     }
+
 }

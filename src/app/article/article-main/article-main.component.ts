@@ -1,3 +1,14 @@
+/*
+
+Name: ArticleMainComponent
+
+This component listens to the event emitted when the user clicks on a sidebar link.
+Once the event fires, the article panel is loaded into the DOM.
+Elements values are data-bound and utilize link objects values once received.
+Comments are fetched once the article header has loaded.
+
+*/
+
 import { Component, OnDestroy } from '@angular/core';
 import { RedditLinks, RedditComments } from '../../interfaces/reddit-data';
 import { RedditDataService } from '../../services/reddit-data.service';
@@ -20,10 +31,7 @@ export class ArticleMainComponent implements OnDestroy {
   comments_reorganized: RedditComments[];
   commentsLoaded: boolean;
 
-  /*
-  Subscribe to the getCurrentLink() to listen to the event emitted once the user clicks on a sidebar link.
-  Link object's values are displayed through Angular expressions and subscribeToComments() is called to fetch comments.
-  */
+  
 
   constructor(private _redditDataService: RedditDataService) {
     this.commentsLoaded= false;
@@ -76,6 +84,13 @@ export class ArticleMainComponent implements OnDestroy {
     }
   }
 
+  calcDate(created_utc: number): string{
+    return this._redditDataService.calcDate(created_utc);
+  }
+
+  isImage(image_url: string): boolean{
+    return this._redditDataService.isImage(image_url);
+  }
 
   ngOnDestroy() {
     this.linkSubscription.unsubscribe();
@@ -84,6 +99,5 @@ export class ArticleMainComponent implements OnDestroy {
   revoke_subscription(): void{
     this.commentSubscription.unsubscribe();
   }
-
 
 }

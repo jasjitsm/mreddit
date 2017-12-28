@@ -1,3 +1,11 @@
+/*
+
+Name: HomeComponent
+
+This component contains the markup structure for the entire home page (excluding the navbar).
+
+*/
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +13,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent{
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
